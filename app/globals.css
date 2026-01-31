@@ -1,6 +1,19 @@
 @import "tailwindcss";
 
-:root {
+.not-found>h1{
+  text-shadow: 3px 3px 3px white;
+}
+.dropdown>ul{
+  display: none;
+}
+.dropdown:hover>ul{
+  display: block;
+  display: flex;  
+}
+.bank{
+  text-shadow: 3px 2px 4px black;
+}
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +36,5 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
+
