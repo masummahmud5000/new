@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
             <h1 className="text-3xl ml-3 font-bold"><span className="text-amber-400">M</span>asum <span className="text-fuchsia-300">M</span>ahmud</h1>
             <li className="dropdown relative lg:ml-[65%]">
               <h1 className="fa fa-bars text-4xl ml-10 cursor-pointer"></h1>
-              <ul className="flex flex-col absolute text-white px-3 py-3 gap-3 rounded-b-xl right-0 bg-green-600 top-full pt-10 z-50 transition-all duration-500">
+              <ul className="flex flex-col absolute text-white border-b-4 border-amber-600 px-3 py-3 gap-3 rounded-b-xl right-0 bg-green-600 top-full pt-10 z-50 transition-all duration-500">
 
                 <Link href={'/'}>Home</Link>
                 <Link href={'/dash'}>Dashboard</Link>
