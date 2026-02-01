@@ -29,6 +29,19 @@ export default function RootLayout({ children }) {
           </ul>
         </nav>
         {children}
+        <footer className="bg-green-900 py-7 border-t-8 border-blue-500">
+          <div className="flex pl-15 mb-3 gap-5 text-white">
+            <h1 className="text-amber-300 text-xl">Admin : Masum Mahmud</h1>
+          </div>
+          <div className="flex pl-15 gap-5 text-white">
+            <h1>Contact : </h1>
+            <h1>mdmasumpresent@gmail.com</h1>
+          </div>
+          <div className="flex pl-15 mt-3 gap-5 text-white">
+            <h1>Phone : </h1>
+            <h1>01884885000</h1>
+          </div>
+        </footer>
       </body>
     </html>
   );
