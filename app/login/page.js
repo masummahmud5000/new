@@ -1,10 +1,12 @@
 'use client'
 import LoginForm from '@/_server-action/formLogin';
 import '@/app/globals.css'
-import axios from 'axios';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
+    const router = useRouter();
+
     const [isLoading,setIsLoading] = useState(false);
     const [Error,setError] = useState('');
 
@@ -20,6 +22,7 @@ const Login = () => {
                 setUsername('');
                 setPassword('');
                 setError('');
+                router.push('/dash')            
             }else if(res?.non_field_errors.includes('userNotFound')){
                 setError('Incorret UserName & Password');
                 setTimeout(()=>setError(''),4000);
@@ -45,7 +48,7 @@ const Login = () => {
                     <input value={password} required onChange={(e)=>setPassword(e.target.value)} type='password' placeholder="Type 8 Digit Password"/>
                     <h3 className='fa fa-lock'/>
                 </div>
-                <button type="submit" className='mt-5 bg-green-600 text-white w-full h-12 rounded-xl text-2xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Register')}</button>
+                <button type="submit" className='mt-5 bg-green-600 text-white w-full h-12 rounded-xl text-2xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Login')}</button>
             </form>
         </main>
     )

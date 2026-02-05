@@ -2,8 +2,9 @@ import '@/app/globals.css'
 import Link from 'next/link';
 
 const Home = () => {
+  
   return(
-    <main className="flex flex-col items-center bg-blue-200 h-screen pt-15">
+    <main className="flex flex-col items-center bg-blue-200 h-screen pt-5">
       <h1 className="bank text-6xl font-bold text-white lg:text-7xl">MT Bank</h1>
       <h1 className="text-4xl mt-5 text-blue-700 lg:text-5xl">Limited Bangladesh</h1>
       <div className='mt-15 lg:mt-5 bg-red-300 px-8 py-3 text-lg rounded-xl text-blue-600'>সর্বনিম্ন ক্যাশ আউট চার্জ<span className='text-red-600 text-xl'> MT</span> তে</div>

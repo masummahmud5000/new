@@ -49,6 +49,12 @@
 .registerForm h3{
   text-align: end;
 }
+.mainDash{
+  box-shadow: 0 0 5px black;
+}
+.dash2{
+  box-shadow: 0 0 5px black;
+}
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
