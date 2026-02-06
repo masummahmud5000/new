@@ -19,10 +19,11 @@ export const serverApi = async (config) => {
                 const access = r.data.access
                 cookieStore.set('access_token', access, {httpOnly: true, secure: false, sameSite: 'lax'});
                 return await api({...config, headers: {Authorization: `Bearer ${access}`}})
-            }catch(err){
+            }catch{
                 cookieStore.delete('access_token');
                 cookieStore.delete('refresh_token');
-                redirect('/login')
+
+                return ({tokenError:401})
             }
         }
     }

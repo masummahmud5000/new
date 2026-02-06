@@ -3,13 +3,10 @@ import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
 import logo from '@/public/logo.png'
-import Logout from "@/sub-client/logout";
 // import NavSlide from "@/sub-client/nav-slide";
 
 export default function RootLayout({ children }) {
-  const hiddenPass = (hidden) => {
-    
-  }
+
   return (
     <html lang="en">
       <body>
@@ -30,7 +27,6 @@ export default function RootLayout({ children }) {
           </ul>
         </nav>
         {children}
-        <Logout/>
         <footer className="bg-green-900 py-7 border-t-8 border-blue-500">
           <div className="flex pl-15 mb-3 gap-5 text-white">
             <h1 className="text-amber-300 text-xl">Admin : Masum Mahmud</h1>

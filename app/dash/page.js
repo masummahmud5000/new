@@ -2,35 +2,67 @@
 
 import { useState, useEffect } from "react";
 import dashboardAction from "@/_server-action/dashboard";
+import { useRouter } from "next/navigation";
+import Logout from "@/sub-client/logout";
+import CashOut from "@/sub-client/transactionForm/cashOut";
+import SendMoney from "@/sub-client/transactionForm/sendMoney";
+import AddMoney from "@/sub-client/transactionForm/addMoney";
+import MoneyTransfer from "@/sub-client/transactionForm/moneytransfer";
 
 const Dashboard = () => {
+    const router = useRouter();
+
     const [username, setUsername] = useState('');
     const [balance, setBalance] = useState('');
+    const [userStatus, setUserStatus] = useState(Boolean);
+    ///////////////////////////////
+    const [cashOutForm,setCashOutForm] = useState(false);
+    const [sendMoneyForm,setSendMoneyForm] = useState(false);
+    const [addMoneyForm,setAddMoneyForm] = useState(false);
+    const [moneyTransferForm,setMoneyTransferForm] = useState(false);
+    ///////////////////////////////
+    const handleForm = (type) => {
+        setCashOutForm(prev => type === 'cashOut' ? !prev : false)
+        setSendMoneyForm(prev => type === 'sendMoney' ? !prev : false)
+        setAddMoneyForm(prev => type === 'addMoney' ? !prev : false)
+        setMoneyTransferForm(prev => type === 'moneyTransfer' ? !prev : false)
+    }
+    // console.log(cashOutForm,sendMoneyForm,addMoneyForm,moneyTransferForm)
+    ///////////////////////////////
 
     useEffect(() => {
         const profileTriger = async() => {
             const res = await dashboardAction();
-            if (res?.tokenError === 401){
-                setUsername('User Not Found')
-                setBalance('0.00')
+            if (res.tokenError === 401){
+                router.push('login/')
             }else{
-                setUsername(res.username);
-                setBalance(res.balance);
+                setUsername(res?.username);
+                setBalance(res?.balance);
+                setUserStatus(res?.userStatus);
             }
+            
         }
         profileTriger();
     }, [])
     
     return(
         <main className="h-screen pt-5 px-5 justify-center">
-            <div className="mainDash bg-blue-300 px-5 py-5 rounded-xl">
-                <h1 className="text-xl">User: @<span className="text-amber-700 font-bold">{username}</span></h1>
-                <h1 className="text-3xl font-bold text-blue-700">$ {balance}</h1>
+            <div className="mainDash bg-blue-300 px-5 lg:pl-10 py-5 rounded-xl">
+                <h1 className="text-xl lg:text-2xl">User: @<span className="text-amber-700 font-bold">{username}</span></h1>
+                <h1 className="text-3xl lg:text-4xl font-bold text-blue-700">$ {balance}</h1>
+            <Logout/>
             </div>
-            <div className="dash2 bg-blue-300 rounded-lg mt-8 py-2 px-5 text-center">
-                <button className="bg-red-800 hover:bg-red-900 px-5 py-1 rounded-lg text-white mr-10 w-35 lg:w-100 lg:h-10 cursor-pointer">Cash Out</button>
-                <button className="bg-amber-700 hover:bg-amber-800 px-5 py-1 rounded-lg text-white w-35 lg:w-100 lg:h-10 cursor-pointer">Send Money</button>
+            <div className=" flex gap-5 lg:gap-30 dash2 bg-blue-300 rounded-lg mt-8 py-2 px-5 text-center justify-center">
+                {!userStatus && <button onClick={()=>handleForm('cashOut')} className="bg-red-800 hover:bg-red-900 px-5 py-1 rounded-lg text-white mr-10 w-40 lg:w-100 lg:h-10 cursor-pointer">Cash Out</button>}
+                {!userStatus && <button onClick={()=>handleForm('sendMoney')} className="bg-amber-700 hover:bg-amber-800 px-5 py-1 rounded-lg text-white w-40 lg:w-100 lg:h-10 cursor-pointer">Send Money</button>}
+
+                {userStatus && <button onClick={()=>handleForm('addMoney')} className="bg-green-700 hover:bg-green-800 px-5 py-1 rounded-lg text-white w-40 lg:w-100 lg:h-10 cursor-pointer">Add Money</button>}
+                {userStatus && <button onClick={()=>handleForm('moneyTransfer')} className="bg-amber-700 hover:bg-amber-800 px-5 py-1 rounded-lg text-white w-40 lg:w-100 lg:h-10 cursor-pointer">Money Transfer</button>}
             </div>
+            {cashOutForm && <CashOut/>}
+            {sendMoneyForm && <SendMoney/>}
+            {addMoneyForm && <AddMoney/>}
+            {moneyTransferForm && <MoneyTransfer/>}
         </main>
     )
 }

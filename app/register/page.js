@@ -1,10 +1,13 @@
 'use client'
 
+import LoginForm from '@/_server-action/formLogin';
 import FormSubmit from '@/_server-action/formSubmit';
 import '@/app/globals.css'
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Register = () => {
+    const router = useRouter();
     const [isLoading,setIsLoading] = useState(false);
     const [usernameError,setUsernameError] = useState('');
     const [passwordError,setPasswordError] = useState('');
@@ -20,12 +23,15 @@ const Register = () => {
         try{
             const res = await FormSubmit(name,username,password);
             if (res?.success == true){
-                setName('');
-                setUsername('');
-                setPassword('');
-
-                setUsernameError('');
-                setPasswordError('');
+                const res = await LoginForm(username,password);
+                if (res.success === true){
+                    setName('');
+                    setUsername('');
+                    setPassword('');
+                    setUsernameError('');
+                    setPasswordError('');
+                    router.push('dash/')
+                };
             }else if(res.username?.includes('userAlready')){
                 setUsernameError('User Already Exist!');
                 setPasswordError('');
