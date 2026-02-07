@@ -1,7 +1,6 @@
 'use server'
 
 import axios from "axios"
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers"
 
 const api = axios.create({baseURL: 'http://127.0.0.1:8000/'});
@@ -22,8 +21,7 @@ export const serverApi = async (config) => {
             }catch{
                 cookieStore.delete('access_token');
                 cookieStore.delete('refresh_token');
-
-                return ({tokenError:401})
+                throw new Error('refreshTokenInvalid');
             }
         }
     }

@@ -1,13 +1,14 @@
 'use server'
 
+import { redirect } from "next/navigation";
 import { serverApi } from "./axiosInstanse";
 
 const dashboardAction = async () => {
-    const res = await serverApi({url: 'profile/'})
-    if (res?.tokenError === 401){
-      return res;
-    }else{
-      return res?.data
+    try{
+      const res = await serverApi({url: 'profile/'});
+      return res?.data;
+    }catch(err){
+      return err
     }
 }
 

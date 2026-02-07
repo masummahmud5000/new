@@ -55,6 +55,21 @@
 .dash2{
   box-shadow: 0 0 5px black;
 }
+.cashOutForm div{
+  display: flex;
+  align-items: center;
+  background: white;
+  height: 35px;
+  padding-left: 15px;
+  border-radius: 10px;
+}
+.cashOutForm div>input{
+  width: 83%;
+  /* border-radius: 10px */
+}
+.cashOutForm div>input:focus{
+  outline: none;
+}
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

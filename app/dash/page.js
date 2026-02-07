@@ -8,6 +8,7 @@ import CashOut from "@/sub-client/transactionForm/cashOut";
 import SendMoney from "@/sub-client/transactionForm/sendMoney";
 import AddMoney from "@/sub-client/transactionForm/addMoney";
 import MoneyTransfer from "@/sub-client/transactionForm/moneytransfer";
+import { serverApi } from "@/_server-action/axiosInstanse";
 
 const Dashboard = () => {
     const router = useRouter();
@@ -27,20 +28,21 @@ const Dashboard = () => {
         setAddMoneyForm(prev => type === 'addMoney' ? !prev : false)
         setMoneyTransferForm(prev => type === 'moneyTransfer' ? !prev : false)
     }
-    // console.log(cashOutForm,sendMoneyForm,addMoneyForm,moneyTransferForm)
-    ///////////////////////////////
-
+    
     useEffect(() => {
         const profileTriger = async() => {
-            const res = await dashboardAction();
-            if (res.tokenError === 401){
-                router.push('login/')
-            }else{
-                setUsername(res?.username);
-                setBalance(res?.balance);
-                setUserStatus(res?.userStatus);
+            try{
+                const res = await dashboardAction();
+                if (res.message === 'refreshTokenInvalid'){
+                    router.push('/login')
+                }else{
+                    setUsername(res?.username);
+                    setBalance(res?.balance);
+                    setUserStatus(res?.userStatus);
+                }
+            }catch(err){
+                
             }
-            
         }
         profileTriger();
     }, [])
