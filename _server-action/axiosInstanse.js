@@ -23,6 +23,8 @@ export const serverApi = async (config) => {
                 cookieStore.delete('refresh_token');
                 throw new Error('refreshTokenInvalid');
             }
+        }else{
+            throw err?.response?.data;
         }
     }
 }

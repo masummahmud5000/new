@@ -17,7 +17,7 @@ const LoginForm = async (username,password) => {
                 const parts = cookieString.split(';');
                 const [name, value] = parts[0].split('=');
                 
-                cookieStore.set(name, value,{httpOnly: true, sameSite: 'lax', secure: false, })
+                cookieStore.set(name, value,{httpOnly: true, sameSite: 'lax', secure: false,})
             })
         }
         ///////////////////

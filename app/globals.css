@@ -42,6 +42,7 @@
 }
 .registerForm input{
   width: 85%;
+  
 }
 .registerForm input:focus{
   outline: none;
@@ -65,6 +66,7 @@
 }
 .cashOutForm div>input{
   width: 83%;
+  
   /* border-radius: 10px */
 }
 .cashOutForm div>input:focus{

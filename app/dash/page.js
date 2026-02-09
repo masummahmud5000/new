@@ -51,7 +51,7 @@ const Dashboard = () => {
         <main className="h-screen pt-5 px-5 justify-center">
             <div className="mainDash bg-blue-300 px-5 lg:pl-10 py-5 rounded-xl">
                 <h1 className="text-xl lg:text-2xl">User: @<span className="text-amber-700 font-bold">{username}</span></h1>
-                <h1 className="text-3xl lg:text-4xl font-bold text-blue-700">$ {balance}</h1>
+                <h1 className="text-3xl lg:text-4xl font-bold text-blue-700">$ {balance?.toLocaleString()}</h1>
             <Logout/>
             </div>
             <div className=" flex gap-5 lg:gap-30 dash2 bg-blue-300 rounded-lg mt-8 py-2 px-5 text-center justify-center">

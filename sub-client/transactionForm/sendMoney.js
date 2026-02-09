@@ -1,6 +1,6 @@
 'use client'
 
-const CashOut = () => {
+const SendMoney = () => {
     return(
         <main className="pt-15">
             <form className="cashOutForm flex flex-col bg-green-600 px-10 py-7 gap-5 rounded-xl">
@@ -21,4 +21,4 @@ const CashOut = () => {
         </main>
     )
 }
-export default CashOut;
+export default SendMoney;
