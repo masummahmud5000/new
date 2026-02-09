@@ -21,5 +21,5 @@ export const middleware = (request) => {
     }
 }
 export const config = {
-    matcher: ['/dash', '/login', '/register']
+    matcher: ['/dashh', '/login', '/register']
 };
