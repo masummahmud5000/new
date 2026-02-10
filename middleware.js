@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 
 export const middleware = (request) => {
+
     const access = request.cookies.get('access_token')
+    const refresh = request.cookies.get('refresh_token')
+
     const { pathname } = request.nextUrl;
 
     const isAuth = pathname === '/login' || pathname === '/register';
@@ -14,12 +17,12 @@ export const middleware = (request) => {
     
     const isProtected = pathname.startsWith('/dash');
 
-    if (isProtected && !access){
+    if (isProtected && !access && !refresh){
         return NextResponse.redirect(new URL('/login', request.url))
     }else{
         return NextResponse.next()
     }
 }
 export const config = {
-    matcher: ['/dashh', '/login', '/register']
+    matcher: ['/dash/:path*', '/login', '/register']
 };

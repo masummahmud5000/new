@@ -17,7 +17,8 @@ export const serverApi = async (config) => {
                 const r = await api.post('http://127.0.0.1:8000/refresh/', {refresh})
                 const access = r.data.access
                 cookieStore.set('access_token', access, {httpOnly: true, secure: false, sameSite: 'lax'});
-                return await api({...config, headers: {Authorization: `Bearer ${access}`}})
+                const ready = await api({...config, headers: {Authorization: `Bearer ${access}`}})
+                return ready;
             }catch{
                 cookieStore.delete('access_token');
                 cookieStore.delete('refresh_token');
