@@ -9,6 +9,7 @@ import SendMoney from "@/sub-client/transactionForm/sendMoney";
 import AddMoney from "@/sub-client/transactionForm/addMoney";
 import MoneyTransfer from "@/sub-client/transactionForm/moneytransfer";
 import { serverApi } from "@/_server-action/axiosInstanse";
+// import wsBalance from "@/sub-client/wsBalance";
 
 const Dashboard = () => {
     const router = useRouter();
@@ -21,6 +22,7 @@ const Dashboard = () => {
     const [sendMoneyForm,setSendMoneyForm] = useState(false);
     const [addMoneyForm,setAddMoneyForm] = useState(false);
     const [moneyTransferForm,setMoneyTransferForm] = useState(false);
+    const [flash,setFlash] = useState(false)
     ///////////////////////////////
     const handleForm = (type) => {
         setCashOutForm(prev => type === 'cashOut' ? !prev : false)
@@ -30,28 +32,58 @@ const Dashboard = () => {
     }
     
     useEffect(() => {
+        let socket;
         const profileTriger = async() => {
+            setUsername('Loading...')
+            setBalance('Loading...');
             try{
                 const res = await dashboardAction();
+                
                 if (res.message === 'refreshTokenInvalid'){
                     router.push('/login')
                 }else{
-                    setUsername(res?.username);
-                    setBalance(res?.balance);
-                    setUserStatus(res?.userStatus);
-                }
+                    // console.log(res)
+                    setUsername(res?.user);
+                    setUserStatus(res?.status);
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // console.log(res?.token)
+                    socket = new WebSocket(`ws://127.0.0.1:8000/ws/some/?token=${res?.token}`);
+
+                    socket.onmessage = (event) => {
+                        const data = JSON.parse(event.data);
+                        // console.log(data)
+                        if(data.balance !== undefined){
+                            let balanceStyle = parseFloat(data?.balance)
+                            let formatStyle = balanceStyle.toLocaleString('en-IN', {minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                            setFlash(true)
+                            setTimeout(()=>setFlash(false),1000)
+                            setBalance(formatStyle)
+                        }else{
+                            setBalance('Balance Not Found!')
+                        }
+                    };
+                    ///////////////////////
+                };
             }catch(err){
                 
             }
         }
+        
         profileTriger();
+        return () => {
+            if (socket){
+                socket.close();
+            }
+        };
     }, [])
     
     return(
         <main className="h-screen pt-5 px-5 justify-center">
-            <div className="mainDash bg-blue-300 px-5 lg:pl-10 py-5 rounded-xl">
-                <h1 className="text-xl lg:text-2xl">User: @<span className="text-amber-700 font-bold">{username}</span></h1>
-                <h1 className="text-3xl lg:text-4xl font-bold text-blue-700">$ {balance?.toLocaleString()}</h1>
+            <div className="mainDash bg-blue-300 px-5 lg:pl-10 pt-5 rounded-xl border-8 border-t border-r border-l border-red-800">
+                <h1 className="text-xl lg:text-2xl">User: @<span className="text-[#af38ef] font-bold">{username}</span></h1>
+                <span className="flex text-4xl font-bold mt-2"><p className="text-blue-700 pr-2">$</p><h1 className={flash ? "text-red-700": "text-blue-700"}>{balance}</h1></span>
             <Logout/>
             </div>
             <div className=" flex gap-5 lg:gap-30 dash2 bg-blue-300 rounded-lg mt-8 py-2 px-5 text-center justify-center">
@@ -63,7 +95,7 @@ const Dashboard = () => {
             </div>
             {cashOutForm && <CashOut/>}
             {sendMoneyForm && <SendMoney/>}
-            {addMoneyForm && <AddMoney/>}
+            {addMoneyForm && <AddMoney setAddMoneyForm={setAddMoneyForm}/>}
             {moneyTransferForm && <MoneyTransfer/>}
         </main>
     )

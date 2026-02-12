@@ -4,7 +4,7 @@ import AddMoneyAction from "@/_server-action/transactionForm/addMoney";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const AddMoney = () => {
+const AddMoney = (props) => {
     const router = useRouter()
 
     const [isLoading,setIsLoading] = useState(false);
@@ -20,7 +20,7 @@ const AddMoney = () => {
             const res = await AddMoneyAction(balance,password);
             // console.log(res)
             if (res === 200){
-                window.location.reload()
+                props.setAddMoneyForm(false);
             }
 
             if (res?.message === 'refreshTokenInvalid'){
@@ -60,7 +60,7 @@ const AddMoney = () => {
                     <span className="fa fa-lock"/>
                 </div>
                     <h1 className="mr-5 text-red-600 animate-pulse">{passwordError}</h1>
-                <button type="submit" className='mt-5 bg-green-600 text-white w-full h-12 rounded-xl text-2xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Add Money')}</button>
+                <button type="submit" className='mt-5 bg-amber-600 text-white w-full h-12 rounded-xl text-2xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Add Money')}</button>
             </form>
         </main>
     )
