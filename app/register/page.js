@@ -6,6 +6,11 @@ import '@/app/globals.css'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+export const metadata = {
+    title: "Register",
+    description: "যদি একাউন্ট না থাকে, একাউন্ট করে নিন!"
+};
+
 const Register = () => {
     const router = useRouter();
     const [isLoading,setIsLoading] = useState(false);

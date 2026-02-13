@@ -1,6 +1,11 @@
 import '@/app/globals.css'
 import Link from 'next/link';
 
+export const metadata = {
+  title: "Home",
+  description: "Main Page"
+};
+
 const Home = () => {
   
   return(

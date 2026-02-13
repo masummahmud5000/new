@@ -4,10 +4,10 @@ import logoutAction from "@/_server-action/logout"
 const Logout = () => {
 
     const logout = async () => {
-        const res = await logoutAction();
-        // if(res === 'done'){
-        //     window.location.href='/login'
-        // }
+        const sure = confirm('Are Your Sure Logout!')
+        if (sure){
+            const res = await logoutAction();
+        }
     }
     
     return(
