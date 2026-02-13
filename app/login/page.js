@@ -4,10 +4,10 @@ import '@/app/globals.css'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export const metadata = {
-    title: "Login",
-    description: "যদি একাউন্ট থাকে তাহলে, লগইন করুন!"
-};
+// export const metadata = {
+//     title: "Login",
+//     description: "যদি একাউন্ট থাকে তাহলে, লগইন করুন!"
+// };
 
 const Login = () => {
     const router = useRouter();
@@ -44,16 +44,16 @@ const Login = () => {
                 <h1>Login</h1>
                 <label>User Name</label>
                 <div>
-                    <input value={username} required onChange={(e)=>setUsername(e.target.value)} placeholder="Type Uniqeu UserName"/>
+                    <input value={username} required onChange={(e)=>setUsername(e.target.value)} placeholder="Enter Your UserName"/>
                     <h3 className='fa fa-user-tag'/>
                     <h4 className='mt-5 text-red-600 animate-bounce'>{Error}</h4>
                 </div>
                 <label>Password</label>
                 <div>
-                    <input value={password} required onChange={(e)=>setPassword(e.target.value)} type='password' placeholder="Type 8 Digit Password"/>
+                    <input value={password} required onChange={(e)=>setPassword(e.target.value)} type='password' placeholder="Enter Your Password"/>
                     <h3 className='fa fa-lock'/>
                 </div>
-                <button type="submit" className='mt-5 bg-green-600 text-white w-full h-12 rounded-xl text-2xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Login')}</button>
+                <button type="submit" className='mt-5 bg-green-600 text-white w-full h-12 rounded-xl text-2xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner  animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Login')}</button>
             </form>
         </main>
     )

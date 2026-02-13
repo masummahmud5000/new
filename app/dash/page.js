@@ -23,6 +23,7 @@ const Dashboard = () => {
     const [addMoneyForm,setAddMoneyForm] = useState(false);
     const [moneyTransferForm,setMoneyTransferForm] = useState(false);
     const [flash,setFlash] = useState(false)
+    // const [skeliton,setSkeliton] = useState(false)
     ///////////////////////////////
     const handleForm = (type) => {
         setCashOutForm(prev => type === 'cashOut' ? !prev : false)
@@ -32,10 +33,10 @@ const Dashboard = () => {
     }
     
     useEffect(() => {
+        setUsername('wait...')
+        setBalance('wait...')
         let socket;
         const profileTriger = async() => {
-            setUsername('Loading...')
-            setBalance('Loading...');
             try{
                 const res = await dashboardAction();
                 
@@ -83,7 +84,7 @@ const Dashboard = () => {
         <main className="h-screen pt-5 px-5 justify-center">
             <div className="mainDash bg-blue-300 px-5 lg:pl-10 pt-5 rounded-xl border-8 border-t border-r border-l border-red-800">
                 <h1 className="text-xl lg:text-2xl">User: @<span className="text-[#af38ef] font-bold">{username}</span></h1>
-                <span className="flex text-4xl font-bold mt-2"><p className="text-blue-700 pr-2">$</p><h1 className={flash ? "text-red-700": "text-blue-700"}>{balance}</h1></span>
+                <span className="flex text-4xl font-bold mt-2"><p className="text-blue-700 pr-2">$</p><h1 className={flash ? "text-red-700 animate-pulse": "text-blue-700"}>{balance}</h1></span>
             <Logout/>
             </div>
             <div className=" flex gap-5 lg:gap-30 dash2 bg-blue-300 rounded-lg mt-8 py-2 px-5 text-center justify-center">
@@ -91,12 +92,12 @@ const Dashboard = () => {
                 {!userStatus && <button onClick={()=>handleForm('sendMoney')} className="bg-amber-700 hover:bg-amber-800 px-5 py-1 rounded-lg text-white w-40 lg:w-100 lg:h-10 cursor-pointer">Send Money</button>}
 
                 {userStatus && <button onClick={()=>handleForm('addMoney')} className="bg-green-700 hover:bg-green-800 px-5 py-1 rounded-lg text-white w-40 lg:w-100 lg:h-10 cursor-pointer">Add Money</button>}
-                {userStatus && <button onClick={()=>handleForm('moneyTransfer')} className="bg-amber-700 hover:bg-amber-800 px-5 py-1 rounded-lg text-white w-40 lg:w-100 lg:h-10 cursor-pointer">Money Transfer</button>}
+                {userStatus && <button onClick={()=>handleForm('moneyTransfer')} className="bg-amber-600 hover:bg-amber-800 px-5 py-1 rounded-lg text-white w-40 lg:w-100 lg:h-10 cursor-pointer">Money Transfer</button>}
             </div>
             {cashOutForm && <CashOut/>}
             {sendMoneyForm && <SendMoney/>}
             {addMoneyForm && <AddMoney setAddMoneyForm={setAddMoneyForm}/>}
-            {moneyTransferForm && <MoneyTransfer/>}
+            {moneyTransferForm && <MoneyTransfer setMoneyTransfer={setMoneyTransferForm}/>}
         </main>
     )
 }

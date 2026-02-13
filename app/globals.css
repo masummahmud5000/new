@@ -72,6 +72,9 @@
 .cashOutForm div>input:focus{
   outline: none;
 }
+.error{
+  text-shadow: 0 0 5px white;
+}
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

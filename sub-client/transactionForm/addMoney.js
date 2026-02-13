@@ -54,12 +54,12 @@ const AddMoney = (props) => {
                     <input type="number" required placeholder="Balance" onChange={(e)=>setBalance(e.target.value)}/>
                     <span className="fa fa-dollar"/>
                 </div>
-                    <h1 className="mr-5 text-red-600 animate-pulse">{balanceError}</h1>
+                    <h1 className="error mr-5 text-red-600 animate-pulse">{balanceError}</h1>
                 <div className="mt-5">                    
                     <input type="password" required placeholder="Enter Your Password" onChange={(e)=>setPassword(e.target.value)}/>
                     <span className="fa fa-lock"/>
                 </div>
-                    <h1 className="mr-5 text-red-600 animate-pulse">{passwordError}</h1>
+                    <h1 className="error mr-5 text-red-600 animate-pulse">{passwordError}</h1>
                 <button type="submit" className='mt-5 bg-amber-600 text-white w-full h-12 rounded-xl text-2xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Add Money')}</button>
             </form>
         </main>

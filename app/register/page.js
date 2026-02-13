@@ -6,10 +6,10 @@ import '@/app/globals.css'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export const metadata = {
-    title: "Register",
-    description: "যদি একাউন্ট না থাকে, একাউন্ট করে নিন!"
-};
+// export const metadata = {
+//     title: "Register",
+//     description: "যদি একাউন্ট না থাকে, একাউন্ট করে নিন!"
+// };
 
 const Register = () => {
     const router = useRouter();
@@ -61,22 +61,22 @@ const Register = () => {
                 <h1>Register</h1>
                 <label>Name</label>
                 <div>
-                    <input value={name} required onChange={(m) => setName(m.target.value)} placeholder="Enter Your Name"/>
+                    <input value={name} required onChange={(m) => setName(m.target.value)} type='text' placeholder="Enter Your Name"/>
                     <h3 className='fa fa-user'/>
                 </div>
                 <label>User Name</label>
                 <div>
-                    <input value={username} required onChange={(m) => setUsername(m.target.value)} placeholder="Type Uniqeu UserName"/>
+                    <input value={username} required onChange={(m) => setUsername(m.target.value)} placeholder="Type Uniqeu UserName" type='text'/>
                     <h3 className='fa fa-user-tag'/>
                     <h4 className='mt-5 text-red-600 animate-bounce'>{usernameError}</h4>
                 </div>
                 <label>Password</label>
                 <div>
-                    <input value={password} required onChange={(m) => setPassword(m.target.value)} placeholder="Type 8 Digit Password"/>
+                    <input value={password} required onChange={(m) => setPassword(m.target.value)} placeholder="Type 8 Digit Password" type='password'/>
                     <h3 className='fa fa-lock'/>
                     <h4 className='mt-5 text-red-600 animate-bounce'>{passwordError}</h4>
                 </div>
-                <button type="submit" className='mt-5 bg-green-600 text-white w-full h-12 rounded-xl text-2xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Register')}</button>
+                <button type="submit" className='mt-5 py-1 bg-green-600 text-white w-full h-12 rounded-xl text-xl cursor-pointer border-2  hover:bg-green-700'>{isLoading ? <h1><span className='fa fa-spinner animate-[spin_2s_linear_infinite] mr-3'></span>Proccess...</h1> : ('Register')}</button>
             </form>
         </main>
     )
