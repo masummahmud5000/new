@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 // export const metadata = {
 //     title: "Login",
 //     description: "যদি একাউন্ট থাকে তাহলে, লগইন করুন!"
-// };
+// }
 
 const Login = () => {
     const router = useRouter();

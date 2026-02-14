@@ -44,7 +44,12 @@ const MoneyTransfer = (props) => {
                 setBalanceError('')
                 setPasswordError('')
                 setTimeout(()=>setUserError(''),4000)
-
+            }else if(res?.non_field_errors?.includes('balance-')){
+                setBalanceError('Insufficient Balance!')
+                setUserError('')
+                setPasswordError('')
+                setTimeout(()=>setBalanceError(''),4000)
+                
             }else if(res?.non_field_errors?.includes('balance_zoro')){
                 setBalanceError('Minimum Transfer 50 Taka')
                 setUserError('')
